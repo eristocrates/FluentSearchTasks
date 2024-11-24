@@ -1,6 +1,6 @@
 zoom: 0.6984504831209762
-offsetX: -29.29740071133199
-offsetY: 367.16299028163706
+offsetX: -126.4655727324585
+offsetY: 394.3575986471595
 children:
 - id: 0
   type: Result selector
@@ -25,6 +25,8 @@ children:
   variables:
   - name: searchResult
     value: result
+  - name: windowTitle
+    value: result.ResultName
   children:
   - id: 1
     type: Custom operation
@@ -34,7 +36,7 @@ children:
       icon:
         value: 
       keyGesture: Alt+S
-      selected: true
+      selected: false
       position: 2
     version: 1.0.0.0
     position:
@@ -48,7 +50,7 @@ children:
       type: Hide search window
       version: 1.0.0.0
       position:
-        x: 2113
+        x: 2111
         y: 1455
       variables:
       - name: myvar
@@ -76,8 +78,8 @@ children:
             content: komorebic minimize
           version: 1.0.0.0
           position:
-            x: 2291
-            y: 1449
+            x: 2302
+            y: 1457
           variables:
           - name: myvar
             value: result
@@ -102,7 +104,7 @@ children:
                   textMatchType: Wildcard
                   matchCase: false
                 processTitleContains:
-                  text: '{searchResult}'
+                  text: '{searchResult.ResultName}'
                   textMatchType: Exact
                   matchCase: false
                 goToPrevious: false
@@ -120,8 +122,8 @@ children:
                   delayInMS: 500
                 version: 1.0.0.0
                 position:
-                  x: 2588
-                  y: 1314
+                  x: 2590
+                  y: 1297
                 variables:
                 - name: myvar
                   value: result
@@ -136,8 +138,8 @@ children:
                     content: komorebic promote
                   version: 1.0.0.0
                   position:
-                    x: 2702
-                    y: 1459
+                    x: 2713
+                    y: 1452
                   variables:
                   - name: myvar
                     value: result
