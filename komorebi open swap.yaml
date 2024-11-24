@@ -1,0 +1,148 @@
+zoom: 0.6984504831209762
+offsetX: -228.48845306776997
+offsetY: 438.2870248849674
+children:
+- id: 0
+  type: Result selector
+  model:
+    name:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    context:
+      text: '*.*'
+      textMatchType: Wildcard
+      matchCase: false
+    tag:
+      tag: apps
+    searchApp:
+      selectedItem:
+        value: Any
+  version: 1.1.0.0
+  position:
+    x: 1707
+    y: 1455
+  variables:
+  - name: searchResult
+    value: result
+  children:
+  - id: 1
+    type: Custom operation
+    model:
+      name: Komorebi Swap
+      iconGlyph: 
+      icon:
+        value: 
+      keyGesture: Alt+S
+      selected: true
+      position: 2
+    version: 1.0.0.0
+    position:
+      x: 1921
+      y: 1457
+    variables:
+    - name: myvar
+      value: result
+    children:
+    - id: 2
+      type: Hide search window
+      version: 1.0.0.0
+      position:
+        x: 2113
+        y: 1455
+      variables:
+      - name: myvar
+        value: result
+      children:
+      - id: 3
+        type: Delay
+        model:
+          delayInMS: 250
+        version: 1.0.0.0
+        position:
+          x: 2220
+          y: 1300
+        variables:
+        - name: myvar
+          value: result
+        children:
+        - id: 4
+          type: PS Script
+          model:
+            powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+            stopOnError: true
+            runAsAdmin: false
+            showWindow: false
+            content: komorebic minimize
+          version: 1.0.0.0
+          position:
+            x: 2330
+            y: 1452
+          variables:
+          - name: myvar
+            value: result
+          children:
+          - id: 5
+            type: Open
+            model:
+              fileName: '{searchResult.Context}'
+              runAsAdmin: false
+              arguments: ''
+            version: 1.0.0.0
+            position:
+              x: 2550
+              y: 1458
+            variables:
+            - name: myvar
+              value: result
+            children:
+            - id: 6
+              type: Delay
+              model:
+                delayInMS: 1000
+              version: 1.0.0.0
+              position:
+                x: 2703
+                y: 1302
+              variables:
+              - name: myvar
+                value: result
+              children:
+              - id: 7
+                type: PS Script
+                model:
+                  powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+                  stopOnError: true
+                  runAsAdmin: false
+                  showWindow: false
+                  content: komorebic promote
+                version: 1.0.0.0
+                position:
+                  x: 2741
+                  y: 1467
+                variables:
+                - name: myvar
+                  value: result
+                children: []
+                comment: ''
+              comment: ''
+            comment: ''
+          comment: ''
+        comment: ''
+      comment: ''
+    comment: ''
+  comment: ''
+- id: 1
+  version: 1.0.0.0
+  comment: ''
+name: komorebi open swap
+author: eristocrates
+iconGlyph: 
+icon:
+  value: 
+description: None
+enable: true
+taskProjectSettings:
+  id: c80d3be7-148b-461a-9604-d18ae18bc33d
+  showSettingPage: false
+  projectSettings: []

@@ -1,0 +1,111 @@
+zoom: 1.0057686956942056
+offsetX: -622.2604939950893
+offsetY: -80.51257919974476
+children:
+- id: 0
+  type: Result selector
+  model:
+    name:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    context:
+      text: '*.exe'
+      textMatchType: Wildcard
+      matchCase: false
+    tag:
+      tag: windows
+    searchApp:
+      selectedItem:
+        value: Any
+  version: 1.1.0.0
+  position:
+    x: 1631
+    y: 1367
+  variables:
+  - name: searchResult
+    value: result
+  - name: path
+    value: result.Context
+  - name: windowTitle
+    value: result.ResultName
+  children: []
+  comment: ''
+- id: 1
+  type: Custom operation
+  model:
+    name: Remove transperency
+    iconGlyph: 
+    icon:
+      value: 
+    keyGesture: Alt+T
+    selected: false
+    position: 5
+  version: 1.0.0.0
+  position:
+    x: 1838
+    y: 1374
+  variables:
+  - name: myvar
+    value: result
+  children:
+  - id: 2
+    type: Hide search window
+    version: 1.0.0.0
+    position:
+      x: 2033
+      y: 1365
+    variables:
+    - name: myvar
+      value: result
+    children:
+    - id: 3
+      type: PS Script
+      model:
+        powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+        stopOnError: true
+        runAsAdmin: false
+        showWindow: true
+        content: >+
+          $extlib = @"
+            [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+            public static extern IntPtr FindWindow(IntPtr sClassName, String sAppName);
+          "@
+
+
+          $win32  = Add-Type -Namespace Win32 -Name Funcs -MemberDefinition $extlib -PassThru
+
+          $wname  = 'Mapkey unterbrochen' # any existing window name
+
+
+          $handle = $win32::FindWindow([IntPtr]::Zero, $windowTitle ) 
+
+
+          if( $handle -gt 0 ) {
+              Read-Host "'$windowTitle' Window not found!"
+          } else {
+              Read-Host "'$windowTitle' Window found! Handle: $hWnd"
+          }
+
+      version: 1.0.0.0
+      position:
+        x: 2253
+        y: 1365
+      variables:
+      - name: myvar
+        value: result
+      children: []
+      comment: ''
+    comment: ''
+  comment: ''
+name: remove layered
+author: eristocrates
+iconGlyph: 
+icon:
+  value: 
+description: work around for komorebi transparency bug
+enable: false
+taskProjectSettings:
+  id: 9dc32d44-8fae-426b-8e95-ddf64e8384b4
+  showSettingPage: false
+  projectSettings: []

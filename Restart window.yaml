@@ -1,0 +1,115 @@
+zoom: 1.0057686956942056
+offsetX: -442.8130377648022
+offsetY: -5.610647026546468
+children:
+- id: 0
+  type: Result selector
+  model:
+    name:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    context:
+      text: '*.exe'
+      textMatchType: Wildcard
+      matchCase: false
+    tag:
+      tag: windows
+    searchApp:
+      selectedItem:
+        value: Any
+  version: 1.1.0.0
+  position:
+    x: 1631
+    y: 1367
+  variables:
+  - name: searchResult
+    value: result
+  - name: path
+    value: result.Context
+  children:
+  - id: 1
+    type: Custom operation
+    model:
+      name: Restart
+      iconGlyph: 
+      icon:
+        value: 
+      keyGesture: Alt+R
+      selected: false
+      position: 6
+    version: 1.0.0.0
+    position:
+      x: 1838
+      y: 1374
+    variables:
+    - name: myvar
+      value: result
+    children:
+    - id: 2
+      type: Hide search window
+      version: 1.0.0.0
+      position:
+        x: 2033
+        y: 1365
+      variables:
+      - name: myvar
+        value: result
+      children:
+      - id: 3
+        type: PS Script
+        model:
+          powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+          stopOnError: true
+          runAsAdmin: false
+          showWindow: false
+          content: >-
+            # Get the process name from the path
+
+            $processName = [System.IO.Path]::GetFileNameWithoutExtension($path)
+
+
+            # Stop the process if it is running
+
+            Get-Process -Name $processName -ErrorAction SilentlyContinue | ForEach-Object {
+                Write-Host "Stopping process $processName..."
+                Stop-Process -Id $_.Id -Force
+            }
+
+
+            # Wait for the process to fully terminate
+
+            Start-Sleep -Seconds 1
+
+
+            # Start the executable again detached from the PowerShell session
+
+            Start-Process -FilePath $path -NoNewWindow -PassThru
+
+            # Read-Host "restarting $path..."
+        version: 1.0.0.0
+        position:
+          x: 2253
+          y: 1365
+        variables:
+        - name: myvar
+          value: result
+        children: []
+        comment: ''
+      comment: ''
+    comment: ''
+  comment: ''
+- id: 1
+  version: 1.0.0.0
+  comment: ''
+name: Restart program
+author: eristocrates
+iconGlyph: 
+icon:
+  value: 
+description: None
+enable: true
+taskProjectSettings:
+  id: 7dcdd2c0-2b27-4c62-a1ef-0acb6c68078c
+  showSettingPage: false
+  projectSettings: []
