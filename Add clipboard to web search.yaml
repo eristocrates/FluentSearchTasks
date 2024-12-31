@@ -13,94 +13,94 @@ zoom: 0.7749818181818182
 offsetX: 1204
 offsetY: 665.8181818181818
 children:
-- id: 0
-  type: Hotkey
-  model:
-    hotkey:
-      name: Hotkey Task trigger
-      hotKeys:
-      - LCTRL
-      - LMENU
-      - LSHIFT
-      - T
-    bindFromVariable: false
-    variableName: ''
-  version: 1.0.0.0
-  position:
-    x: 30
-    y: 1436
-  variables:
-  - name: myvar
-    value: result
-  children:
-  - id: 1
-    type: Delay
+  - id: 0
+    type: Hotkey
     model:
-      delayInMS: 250
+      hotkey:
+        name: Hotkey Task trigger
+        hotKeys:
+          - LCTRL
+          - LMENU
+          - LSHIFT
+          - T
+      bindFromVariable: false
+      variableName: ""
     version: 1.0.0.0
     position:
-      x: 249
-      y: 1435
+      x: 30
+      y: 1436
     variables:
-    - name: myvar
-      value: result
-    children:
-    - id: 2
-      type: Press keys combo
-      model:
-        hotkey:
-          hotKeys:
-          - RCTRL
-          - C
-      version: 1.0.0.0
-      position:
-        x: 31
-        y: 1578
-      variables:
       - name: myvar
         value: result
-      children:
-      - id: 3
+    children:
+      - id: 1
         type: Delay
         model:
-          delayInMS: 333
+          delayInMS: 250
         version: 1.0.0.0
         position:
-          x: 242
-          y: 1582
+          x: 249
+          y: 1435
         variables:
-        - name: myvar
-          value: result
-        children:
-        - id: 4
-          type: Get clipboard text
-          model: {}
-          version: 1.0.0.0
-          position:
-            x: 426
-            y: 1686
-          variables:
-          - name: clipboardText
+          - name: myvar
             value: result
-          children:
-          - id: 5
-            type: Show and search
+        children:
+          - id: 2
+            type: Press keys combo
             model:
-              searchText: '{clipboardText}'
-              searchTags:
-                searchTagSettings:
-                - tag: Web
-            version: 1.0.0.1
+              hotkey:
+                hotKeys:
+                  - RCTRL
+                  - C
+            version: 1.0.0.0
             position:
-              x: 134
-              y: 1743
+              x: 31
+              y: 1578
             variables:
-            - name: myvar
-              value: result
-            children: []
-            comment: ''
-          comment: ''
-        comment: ''
-      comment: ''
-    comment: ''
-  comment: ''
+              - name: myvar
+                value: result
+            children:
+              - id: 3
+                type: Delay
+                model:
+                  delayInMS: 333
+                version: 1.0.0.0
+                position:
+                  x: 242
+                  y: 1582
+                variables:
+                  - name: myvar
+                    value: result
+                children:
+                  - id: 4
+                    type: Get clipboard text
+                    model: {}
+                    version: 1.0.0.0
+                    position:
+                      x: 426
+                      y: 1686
+                    variables:
+                      - name: clipboardText
+                        value: result
+                    children:
+                      - id: 5
+                        type: Show and search
+                        model:
+                          searchText: "{clipboardText}"
+                          searchTags:
+                            searchTagSettings:
+                              - tag: Web
+                        version: 1.0.0.1
+                        position:
+                          x: 134
+                          y: 1743
+                        variables:
+                          - name: myvar
+                            value: result
+                        children: []
+                        comment: ""
+                    comment: ""
+                comment: ""
+            comment: ""
+        comment: ""
+    comment: ""

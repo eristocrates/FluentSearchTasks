@@ -2,238 +2,236 @@ zoom: 0.6375951415095665
 offsetX: 424.5581498294347
 offsetY: 471.9958374127071
 children:
-- id: 0
-  type: Result selector
-  model:
-    name:
-      text: ''
-      textMatchType: Contains
-      matchCase: false
-    context:
-      text: '*.*'
-      textMatchType: Wildcard
-      matchCase: false
-    tag:
-      tag: files
-    searchApp:
-      selectedItem:
-        value: Any
-  version: 1.1.0.0
-  position:
-    x: 1363
-    y: 1258
-  variables:
-  - name: searchResult
-    value: result
-  - name: path
-    value: result.Context
-  children:
-  - id: 1
-    type: Custom operation
+  - id: 0
+    type: Result selector
     model:
-      name: Open in Koffee
-      iconGlyph: 
-      icon:
-        value: 
-      keyGesture: Alt+K
-      selected: false
-      position: 3
-    version: 1.0.0.0
+      name:
+        text: ""
+        textMatchType: Contains
+        matchCase: false
+      context:
+        text: "*.*"
+        textMatchType: Wildcard
+        matchCase: false
+      tag:
+        tag: files
+      searchApp:
+        selectedItem:
+          value: Any
+    version: 1.1.0.0
     position:
-      x: 1634
-      y: 1317
+      x: 1363
+      y: 1258
     variables:
-    - name: myvar
-      value: result
-    children:
-    - id: 2
-      type: Hide search window
-      version: 1.0.0.0
-      position:
-        x: 1833
-        y: 1323
-      variables:
-      - name: myvar
+      - name: searchResult
         value: result
-      children:
-      - id: 3
-        type: PS Script
+      - name: path
+        value: result.Context
+    children:
+      - id: 1
+        type: Custom operation
         model:
-          powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
-          stopOnError: true
-          runAsAdmin: false
-          showWindow: false
-          content: >-
-            # Path to the Koffee executable
-
-            $koffeePath = "C:\Program Files (x86)\Koffee\Koffee.exe"
-
-
-            # Check if Koffee is already running
-
-            $koffeeProcess = Get-Process | Where-Object { $_.Path -eq $koffeePath } 
-
-
-            if ($koffeeProcess) {
-            	return "true"
-            } else {
-                Start-Process -FilePath $koffeePath -ArgumentList $path -NoNewWindow
-            }
+          name: Open in Koffee
+          iconGlyph: 
+          icon:
+            value: 
+          keyGesture: Alt+K
+          selected: false
+          position: 3
         version: 1.0.0.0
         position:
-          x: 1347
-          y: 1573
+          x: 1634
+          y: 1317
         variables:
-        - name: running
-          value: result
-        children:
-        - id: 4
-          type: Condition
-          model:
-            value: '{running == "true"}'
-            continueIfTrue: true
-          version: 1.0.0.0
-          position:
-            x: 1562
-            y: 1581
-          variables:
           - name: myvar
             value: result
-          children:
-          - id: 5
-            type: Switch Process
-            model:
-              processName:
-                text: Koffee
-                textMatchType: Contains
-                matchCase: false
-              processTitleContains:
-                text: ''
-                textMatchType: Contains
-                matchCase: false
-              goToPrevious: false
+        children:
+          - id: 2
+            type: Hide search window
             version: 1.0.0.0
             position:
-              x: 1790
-              y: 1574
+              x: 1833
+              y: 1323
             variables:
-            - name: process
-              value: result
-            children:
-            - id: 6
-              type: Delay
-              model:
-                delayInMS: 256
-              version: 1.0.0.0
-              position:
-                x: 1332
-                y: 1725
-              variables:
               - name: myvar
                 value: result
-              children:
-              - id: 7
-                type: Press keys combo
+            children:
+              - id: 3
+                type: PS Script
                 model:
-                  hotkey:
-                    hotKeys:
-                    - UP
+                  powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+                  stopOnError: true
+                  runAsAdmin: false
+                  showWindow: false
+                  content: >-
+                    # Path to the Koffee executable
+
+                    $koffeePath = "C:\Program Files (x86)\Koffee\Koffee.exe"
+
+                    # Check if Koffee is already running
+
+                    $koffeeProcess = Get-Process | Where-Object { $_.Path -eq $koffeePath } 
+
+                    if ($koffeeProcess) {
+                    	return "true"
+                    } else {
+                        Start-Process -FilePath $koffeePath -ArgumentList $path -NoNewWindow
+                    }
                 version: 1.0.0.0
                 position:
-                  x: 1545
-                  y: 1747
+                  x: 1347
+                  y: 1573
                 variables:
-                - name: myvar
-                  value: result
-                children:
-                - id: 8
-                  type: Press keys combo
-                  model:
-                    hotkey:
-                      hotKeys:
-                      - LCTRL
-                      - A
-                  version: 1.0.0.0
-                  position:
-                    x: 1752
-                    y: 1744
-                  variables:
-                  - name: myvar
+                  - name: running
                     value: result
-                  children:
-                  - id: 9
-                    type: Type text
+                children:
+                  - id: 4
+                    type: Condition
                     model:
-                      text: '{path}'
+                      value: '{running == "true"}'
+                      continueIfTrue: true
                     version: 1.0.0.0
                     position:
-                      x: 1951
-                      y: 1748
+                      x: 1562
+                      y: 1581
                     variables:
-                    - name: myvar
-                      value: result
-                    children:
-                    - id: 10
-                      type: Press keys combo
-                      model:
-                        hotkey:
-                          hotKeys:
-                          - Enter
-                      version: 1.0.0.0
-                      position:
-                        x: 2138
-                        y: 1751
-                      variables:
                       - name: myvar
                         value: result
-                      children: []
-                      comment: ''
-                    comment: ''
-                  comment: ''
-                comment: ''
-              comment: ''
-            comment: ''
-          comment: ''
-        comment: ''
-      comment: ''
-    comment: ''
-  comment: files
-- id: 1
-  version: 1.0.0.0
-  comment: ''
-- id: 11
-  type: Result selector
-  model:
-    name:
-      text: ''
-      textMatchType: Contains
-      matchCase: false
-    context:
-      text: '*:*'
-      textMatchType: Wildcard
-      matchCase: false
-    tag:
-      tag: folder
-    searchApp:
-      selectedItem:
-        value: Any
-  version: 1.1.0.0
-  position:
-    x: 1366
-    y: 1399
-  variables:
-  - name: searchResult
-    value: result
-  - name: path
-    value: result.Context
-  children:
+                    children:
+                      - id: 5
+                        type: Switch Process
+                        model:
+                          processName:
+                            text: Koffee
+                            textMatchType: Contains
+                            matchCase: false
+                          processTitleContains:
+                            text: ""
+                            textMatchType: Contains
+                            matchCase: false
+                          goToPrevious: false
+                        version: 1.0.0.0
+                        position:
+                          x: 1790
+                          y: 1574
+                        variables:
+                          - name: process
+                            value: result
+                        children:
+                          - id: 6
+                            type: Delay
+                            model:
+                              delayInMS: 256
+                            version: 1.0.0.0
+                            position:
+                              x: 1332
+                              y: 1725
+                            variables:
+                              - name: myvar
+                                value: result
+                            children:
+                              - id: 7
+                                type: Press keys combo
+                                model:
+                                  hotkey:
+                                    hotKeys:
+                                      - UP
+                                version: 1.0.0.0
+                                position:
+                                  x: 1545
+                                  y: 1747
+                                variables:
+                                  - name: myvar
+                                    value: result
+                                children:
+                                  - id: 8
+                                    type: Press keys combo
+                                    model:
+                                      hotkey:
+                                        hotKeys:
+                                          - LCTRL
+                                          - A
+                                    version: 1.0.0.0
+                                    position:
+                                      x: 1752
+                                      y: 1744
+                                    variables:
+                                      - name: myvar
+                                        value: result
+                                    children:
+                                      - id: 9
+                                        type: Type text
+                                        model:
+                                          text: "{path}"
+                                        version: 1.0.0.0
+                                        position:
+                                          x: 1951
+                                          y: 1748
+                                        variables:
+                                          - name: myvar
+                                            value: result
+                                        children:
+                                          - id: 10
+                                            type: Press keys combo
+                                            model:
+                                              hotkey:
+                                                hotKeys:
+                                                  - Enter
+                                            version: 1.0.0.0
+                                            position:
+                                              x: 2138
+                                              y: 1751
+                                            variables:
+                                              - name: myvar
+                                                value: result
+                                            children: []
+                                            comment: ""
+                                        comment: ""
+                                    comment: ""
+                                comment: ""
+                            comment: ""
+                        comment: ""
+                    comment: ""
+                comment: ""
+            comment: ""
+        comment: ""
+    comment: files
   - id: 1
     version: 1.0.0.0
-    comment: ''
-  comment: folder
-- id: 4
-  version: 1.0.0.0
-  comment: ''
+    comment: ""
+  - id: 11
+    type: Result selector
+    model:
+      name:
+        text: ""
+        textMatchType: Contains
+        matchCase: false
+      context:
+        text: "*:*"
+        textMatchType: Wildcard
+        matchCase: false
+      tag:
+        tag: folder
+      searchApp:
+        selectedItem:
+          value: Any
+    version: 1.1.0.0
+    position:
+      x: 1366
+      y: 1399
+    variables:
+      - name: searchResult
+        value: result
+      - name: path
+        value: result.Context
+    children:
+      - id: 1
+        version: 1.0.0.0
+        comment: ""
+    comment: folder
+  - id: 4
+    version: 1.0.0.0
+    comment: ""
 name: Koffee
 author: eristocrates
 iconGlyph: 
