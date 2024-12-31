@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+# Allow directories (necessary to traverse the file tree)
+!*/
+
+# Allow files by type
+!*.gitignore
+!*.yaml
+!*.md

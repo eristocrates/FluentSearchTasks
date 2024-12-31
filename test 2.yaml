@@ -1,0 +1,338 @@
+zoom: 1.0057686956942056
+offsetX: 0
+offsetY: 0
+children:
+- id: 0
+  type: Hotkey
+  model:
+    hotkey:
+      name: Hotkey Task trigger
+      hotKeys: []
+    bindFromVariable: false
+    variableName: ''
+  version: 1.0.0.0
+  position:
+    x: 1157
+    y: 1336
+  variables:
+  - name: myvar
+    value: result
+  children:
+  - id: 1
+    type: PS Script
+    model:
+      powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+      stopOnError: true
+      runAsAdmin: false
+      showWindow: false
+      content: >-
+        $string = komorebic state | Out-String
+
+        return $string
+    version: 1.0.0.0
+    position:
+      x: 1342
+      y: 1312
+    variables:
+    - name: powershellScriptResult
+      value: result
+    children:
+    - id: 2
+      type: Parse JSON
+      model:
+        propertyNameCaseInsensitive: false
+        jsonContent: >
+          {
+            "monitors": {
+              "elements": [
+                {
+                  "id": 1049566253,
+                  "name": "DISPLAY1",
+                  "device": "Default_Monitor",
+                  "device_id": "Default_Monitor-1&c528b8a&0&UID256",
+                  "size": {
+                    "left": -1680,
+                    "top": 2,
+                    "right": 1680,
+                    "bottom": 1050
+                  },
+                  "work_area_size": {
+                    "left": -1680,
+                    "top": 32,
+                    "right": 1680,
+                    "bottom": 1020
+                  },
+                  "work_area_offset": null,
+                  "window_based_work_area_offset": null,
+                  "window_based_work_area_offset_limit": 1,
+                  "workspaces": {
+                    "elements": [
+                      {
+                        "name": null,
+                        "containers": {
+                          "elements": [
+                            {
+                              "id": "-bQ00CDKXX-Uk7RiaLIEf",
+                              "windows": {
+                                "elements": [
+                                  {
+                                    "hwnd": 655674,
+                                    "title": "c# - Run Command Prompt Commands - Stack Overflow 窶・Mozilla Firefox",
+                                    "exe": "firefox.exe",
+                                    "class": "MozillaWindowClass",
+                                    "rect": {
+                                      "left": -1681,
+                                      "top": 31,
+                                      "right": 1682,
+                                      "bottom": 1022
+                                    }
+                                  }
+                                ],
+                                "focused": 0
+                              }
+                            }
+                          ],
+                          "focused": 0
+                        },
+                        "monocle_container": null,
+                        "maximized_window": null,
+                        "floating_windows": [],
+                        "layout": {
+                          "Default": "BSP"
+                        },
+                        "layout_rules": [],
+                        "layout_flip": null,
+                        "workspace_padding": 0,
+                        "container_padding": 0,
+                        "latest_layout": [
+                          {
+                            "left": -1681,
+                            "top": 31,
+                            "right": 1682,
+                            "bottom": 1022
+                          }
+                        ],
+                        "resize_dimensions": [
+                          null
+                        ],
+                        "tile": true,
+                        "apply_window_based_work_area_offset": true,
+                        "window_container_behaviour": null,
+                        "float_override": null
+                      }
+                    ],
+                    "focused": 0
+                  },
+                  "workspace_names": {}
+                },
+                {
+                  "id": 395713667,
+                  "name": "DISPLAY2",
+                  "device": "Default_Monitor",
+                  "device_id": "Default_Monitor-1&c528b8a&0&UID257",
+                  "size": {
+                    "left": 1440,
+                    "top": 2,
+                    "right": 1680,
+                    "bottom": 1050
+                  },
+                  "work_area_size": {
+                    "left": 1440,
+                    "top": 32,
+                    "right": 1680,
+                    "bottom": 1020
+                  },
+                  "work_area_offset": null,
+                  "window_based_work_area_offset": null,
+                  "window_based_work_area_offset_limit": 1,
+                  "workspaces": {
+                    "elements": [
+                      {
+                        "name": null,
+                        "containers": {
+                          "elements": [],
+                          "focused": 0
+                        },
+                        "monocle_container": null,
+                        "maximized_window": null,
+                        "floating_windows": [],
+                        "layout": {
+                          "Default": "BSP"
+                        },
+                        "layout_rules": [],
+                        "layout_flip": null,
+                        "workspace_padding": 0,
+                        "container_padding": 0,
+                        "latest_layout": [],
+                        "resize_dimensions": [],
+                        "tile": true,
+                        "apply_window_based_work_area_offset": true,
+                        "window_container_behaviour": null,
+                        "float_override": null
+                      }
+                    ],
+                    "focused": 0
+                  },
+                  "workspace_names": {}
+                },
+                {
+                  "id": 1509217,
+                  "name": "DISPLAY3",
+                  "device": "Default_Monitor",
+                  "device_id": "Default_Monitor-1&c528b8a&0&UID258",
+                  "size": {
+                    "left": 0,
+                    "top": 0,
+                    "right": 1440,
+                    "bottom": 900
+                  },
+                  "work_area_size": {
+                    "left": 0,
+                    "top": 30,
+                    "right": 1440,
+                    "bottom": 870
+                  },
+                  "work_area_offset": null,
+                  "window_based_work_area_offset": null,
+                  "window_based_work_area_offset_limit": 1,
+                  "workspaces": {
+                    "elements": [
+                      {
+                        "name": null,
+                        "containers": {
+                          "elements": [
+                            {
+                              "id": "XeedAz2OurQ1R7Pmwv1Ua",
+                              "windows": {
+                                "elements": [
+                                  {
+                                    "hwnd": 10950622,
+                                    "title": "(1) Tak and the Power of Juju - Nitro Rad - YouTube 窶・Mozilla Firefox",
+                                    "exe": "firefox.exe",
+                                    "class": "MozillaWindowClass",
+                                    "rect": {
+                                      "left": -1,
+                                      "top": 29,
+                                      "right": 722,
+                                      "bottom": 872
+                                    }
+                                  }
+                                ],
+                                "focused": 0
+                              }
+                            },
+                            {
+                              "id": "CLa7xsMnJ-0aI3IL_GmVS",
+                              "windows": {
+                                "elements": [
+                                  {
+                                    "hwnd": 23272764,
+                                    "title": "Tasks - 繧ｨ繧ｯ繧ｹ繝励Ο繝ｼ繝ｩ繝ｼ",
+                                    "exe": "explorer.exe",
+                                    "class": "CabinetWClass",
+                                    "rect": {
+                                      "left": 719,
+                                      "top": 29,
+                                      "right": 722,
+                                      "bottom": 872
+                                    }
+                                  }
+                                ],
+                                "focused": 0
+                              }
+                            }
+                          ],
+                          "focused": 1
+                        },
+                        "monocle_container": null,
+                        "maximized_window": null,
+                        "floating_windows": [],
+                        "layout": {
+                          "Default": "BSP"
+                        },
+                        "layout_rules": [],
+                        "layout_flip": null,
+                        "workspace_padding": 0,
+                        "container_padding": 0,
+                        "latest_layout": [
+                          {
+                            "left": -1,
+                            "top": 29,
+                            "right": 722,
+                            "bottom": 872
+                          },
+                          {
+                            "left": 719,
+                            "top": 29,
+                            "right": 722,
+                            "bottom": 872
+                          }
+                        ],
+                        "resize_dimensions": [
+                          null,
+                          null
+                        ],
+                        "tile": true,
+                        "apply_window_based_work_area_offset": true,
+                        "window_container_behaviour": null,
+                        "float_override": null
+                      }
+                    ],
+                    "focused": 0
+                  },
+                  "workspace_names": {}
+                }
+              ],
+              "focused": 0
+            },
+            "is_paused": false,
+            "resize_delta": 50,
+            "new_window_behaviour": "Create",
+            "float_override": false,
+            "cross_monitor_move_behaviour": "Insert",
+            "unmanaged_window_operation_behaviour": "Op",
+            "work_area_offset": null,
+            "focus_follows_mouse": null,
+            "mouse_follows_focus": true,
+            "has_pending_raise_op": false
+          }
+      version: 1.0.0.0
+      position:
+        x: 1533
+        y: 1273
+      variables:
+      - name: json
+        value: result
+      - name: testid
+        value: result.monitors.elements[0].id
+      children:
+      - id: 3
+        type: Show notification
+        model:
+          title: Fluent Search notification
+          content: '{testid}'
+          sound: Default
+          silent: false
+        version: 1.0.0.0
+        position:
+          x: 1653
+          y: 1413
+        variables:
+        - name: myvar
+          value: result
+        children: []
+        comment: ''
+      comment: ''
+    comment: ''
+  comment: ''
+name: test 2
+author: eristocrates
+iconGlyph: 
+icon:
+  value: 
+description: None
+enable: true
+taskProjectSettings:
+  id: de5691b4-e49e-450a-a44f-3c33b6729d4b
+  showSettingPage: false
+  projectSettings: []

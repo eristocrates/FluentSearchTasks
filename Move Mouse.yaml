@@ -1,0 +1,154 @@
+zoom: 0.7200000000000003
+offsetX: 0
+offsetY: 0
+children:
+- id: 0
+  type: Result selector
+  model:
+    name:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    context:
+      text: '*.*'
+      textMatchType: Wildcard
+      matchCase: false
+    tag:
+      tag: windows
+    searchApp:
+      selectedItem:
+        value: Any
+  version: 1.1.0.0
+  position:
+    x: 1019
+    y: 1314
+  variables:
+  - name: searchResult
+    value: result
+  children:
+  - id: 1
+    type: Custom operation
+    model:
+      name: Open Window
+      iconGlyph: 
+      icon:
+        value: 
+      keyGesture: Alt+O
+      selected: true
+      position: 1
+    version: 1.0.0.0
+    position:
+      x: 1208
+      y: 1321
+    variables:
+    - name: selectedSearchOperation
+      value: result
+    children:
+    - id: 2
+      type: Hide search window
+      version: 1.0.0.0
+      position:
+        x: 1437
+        y: 1319
+      variables:
+      - name: myvar
+        value: result
+      children:
+      - id: 3
+        type: Delay
+        model:
+          delayInMS: 250
+        version: 1.0.0.0
+        position:
+          x: 1650
+          y: 1358
+        variables:
+        - name: myvar
+          value: result
+        children:
+        - id: 4
+          type: Switch Process
+          model:
+            processName:
+              text: '*'
+              textMatchType: Wildcard
+              matchCase: false
+            processTitleContains:
+              text: '{searchResult.ResultName}'
+              textMatchType: Contains
+              matchCase: false
+            goToPrevious: false
+          version: 1.0.0.0
+          position:
+            x: 1051
+            y: 1512
+          variables:
+          - name: process
+            value: result
+          children:
+          - id: 5
+            type: Delay
+            model:
+              delayInMS: 100
+            version: 1.0.0.0
+            position:
+              x: 1267
+              y: 1539
+            variables:
+            - name: myvar
+              value: result
+            children:
+            - id: 6
+              type: PS Script
+              model:
+                powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+                stopOnError: true
+                runAsAdmin: false
+                showWindow: false
+                content: komorebic promote
+              version: 1.0.0.0
+              position:
+                x: 1477
+                y: 1539
+              variables:
+              - name: powershellScriptResult
+                value: result
+              children:
+              - id: 7
+                type: C# Script
+                model:
+                  enableVariableInline: true
+                  content: "using System;\r\nusing System.Diagnostics;\r\nusing System.IO;\r\n\r\n var output = \"\";\r\n string outputFilePath = @\"C:\\Users\\eristocrates\\AppData\\Roaming\\Blast\\Tasks\\output.txt\";\r\n\r\ntry{\r\nProcess cmd = new Process();\r\ncmd.StartInfo.FileName = @\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\";\r\ncmd.StartInfo.RedirectStandardInput = true;\r\ncmd.StartInfo.RedirectStandardOutput = true;\r\ncmd.StartInfo.CreateNoWindow = true;\r\ncmd.StartInfo.UseShellExecute = false;\r\ncmd.Start();\r\n\r\n           \r\n  output = cmd.StandardOutput.ReadToEnd();\r\n   \r\n     File.WriteAllText(outputFilePath, \"test\");\r\n        \r\n}catch (Exception ex)\r\n        {\r\n            Console.WriteLine($\"An error occurred: {ex.Message}\");\r\n        }\r\n return output;"
+                version: 1.0.0.0
+                position:
+                  x: 1035
+                  y: 1692
+                variables:
+                - name: csharpScriptResult
+                  value: result
+                children: []
+                comment: ''
+              comment: ''
+            comment: ''
+          comment: ''
+        comment: ''
+      comment: ''
+    comment: ''
+  comment: ''
+- id: 1
+  version: 1.0.0.0
+  comment: ''
+- id: 7
+  version: 1.0.0.0
+  comment: ''
+name: Open Window Mouse Move
+author: eristocrates
+iconGlyph: 
+icon:
+  value: 
+description: on switch to window, move mouse via komorebi
+enable: true
+taskProjectSettings:
+  id: eea870b9-2fc2-4ed8-9629-238d7a5bfd2f
+  showSettingPage: false
+  projectSettings: []
