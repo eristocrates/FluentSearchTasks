@@ -13,101 +13,108 @@ zoom: 1.0057686956942056
 offsetX: 0
 offsetY: 0
 children:
-  - id: 0
-    type: Custom operation
-    model:
-      name: Restart
-      iconGlyph: 
-      icon:
-        value: 
-      keyGesture: Alt+R
-      selected: false
-      position: 6
+- id: 0
+  type: Custom operation
+  model:
+    name: Restart
+    iconGlyph: 
+    icon:
+      value: 
+    keyGesture: Alt+R
+    selected: false
+    position: 6
+  version: 1.0.0.0
+  position:
+    x: 1845
+    y: 1346
+  variables:
+  - name: myvar
+    value: result
+  children:
+  - id: 1
+    type: Hide search window
     version: 1.0.0.0
     position:
-      x: 1845
-      y: 1346
+      x: 1597
+      y: 1540
     variables:
-      - name: myvar
-        value: result
+    - name: myvar
+      value: result
     children:
-      - id: 1
-        type: Hide search window
-        version: 1.0.0.0
-        position:
-          x: 1597
-          y: 1540
-        variables:
-          - name: myvar
-            value: result
-        children:
-          - id: 2
-            type: PS Script
-            model:
-              powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
-              stopOnError: true
-              runAsAdmin: false
-              showWindow: false
-              content: >
-                # Get the process name from the path
+    - id: 2
+      type: PS Script
+      model:
+        powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+        stopOnError: true
+        runAsAdmin: false
+        showWindow: false
+        content: >
+          # Get the process name from the path
 
-                $nameFromPath = [System.IO.Path]::GetFileNameWithoutExtension($searchContext)
 
-                # Stop the process if it is running
+          $nameFromPath = [System.IO.Path]::GetFileNameWithoutExtension($searchContext)
 
-                Get-Process -Name $nameFromPath -ErrorAction SilentlyContinue | ForEach-Object {
-                    Write-Host "Stopping process $nameFromPath..."
-                    Stop-Process -Id $_.Id -Force
-                }
 
-                # Wait for the process to fully terminate
+          # Stop the process if it is running
 
-                Start-Sleep -Seconds 1
 
-                # Start the executable again detached from the PowerShell session
+          Get-Process -Name $nameFromPath -ErrorAction SilentlyContinue | ForEach-Object {
+              Write-Host "Stopping process $nameFromPath..."
+              Stop-Process -Id $_.Id -Force
+          }
 
-                Start-Process -FilePath $searchContext -NoNewWindow -PassThru
-            version: 1.0.0.0
-            position:
-              x: 1837
-              y: 1536
-            variables:
-              - name: powershellScriptResult
-                value: result
-            children: []
-            comment: ""
-        comment: ""
-    comment: ""
-  - id: 3
-    type: Result selector
-    model:
-      name:
-        text: f
-        textMatchType: Contains
-        matchCase: false
-      context:
-        text: "*.exe"
-        textMatchType: Wildcard
-        matchCase: false
-      searchApp:
-        selectedItem:
-          value: Any
-    version: 1.1.0.0
-    position:
-      x: 1589
-      y: 1349
-    variables:
-      - name: searchResult
+
+          # Wait for the process to fully terminate
+
+
+          Start-Sleep -Seconds 1
+
+
+          # Start the executable again detached from the PowerShell session
+
+
+          Start-Process -FilePath $searchContext -NoNewWindow -PassThru
+      version: 1.0.0.0
+      position:
+        x: 1837
+        y: 1536
+      variables:
+      - name: powershellScriptResult
         value: result
-      - name: searchContext
-        value: result.Context
-      - name: searchName
-        value: result.DisplayedName
-    children:
-      - id: 0
-        version: 1.0.0.0
-        comment: ""
-    comment: ""
+      children: []
+      comment: ''
+    comment: ''
+  comment: ''
+- id: 3
+  type: Result selector
+  model:
+    name:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    context:
+      text: '*.exe'
+      textMatchType: Wildcard
+      matchCase: false
+    searchApp:
+      selectedItem:
+        value: Any
+  version: 1.1.0.0
+  position:
+    x: 1589
+    y: 1349
+  variables:
+  - name: searchResult
+    value: result
+  - name: searchContext
+    value: result.Context
+  - name: searchName
+    value: result.DisplayedName
+  children:
   - id: 0
     version: 1.0.0.0
-    comment: ""
+    comment: ''
+  comment: ''
+- id: 0
+  version: 1.0.0.0
+  comment: ''
