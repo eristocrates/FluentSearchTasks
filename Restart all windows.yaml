@@ -1,171 +1,171 @@
-zoom: 1.0057686956942056
-offsetX: 0
-offsetY: 0
-children:
-  - id: 0
-    type: Result selector
-    model:
-      name:
-        text: ""
-        textMatchType: Contains
-        matchCase: false
-      context:
-        text: "*.exe"
-        textMatchType: Wildcard
-        matchCase: false
-      tag:
-        tag: windows
-      searchApp:
-        selectedItem:
-          value: Any
-    version: 1.1.0.0
-    position:
-      x: 1389
-      y: 1325
-    variables:
-      - name: searchResult
-        value: result
-      - name: path
-        value: result.Context
-    children:
-      - id: 1
-        type: Custom operation
-        model:
-          name: Restart all windows
-          iconGlyph: 
-          icon:
-            value: 
-          keyGesture: Ctrl+Alt+R
-          selected: false
-          position: 7
-        version: 1.0.0.0
-        position:
-          x: 1590
-          y: 1318
-        variables:
-          - name: myvar
-            value: result
-        children:
-          - id: 2
-            type: Hide search window
-            version: 1.0.0.0
-            position:
-              x: 1786
-              y: 1326
-            variables:
-              - name: myvar
-                value: result
-            children:
-              - id: 3
-                type: C# Script
-                model:
-                  enableVariableInline: false
-                  content: >-
-                    using System;
-
-                    using System.Linq;
-
-                    using System.Diagnostics;
-
-                    using System.IO;
-
-                    using Blast.Core.Objects;
-
-                    using Blast.API.Processes;
-
-                            string outputFilePath = @"C:\Users\eristocrates\AppData\Roaming\Blast\Tasks\output.txt";
-                            string[] exclusions = {
-                                "seelen-ui",
-                                "WindowsTerminal",
-                                "Everything",
-                                "ProtonVPN",
-                                "hitomi_downloader_GUI",
-                                "komorebi-gui",
-                                "TheBrain",
-                                "explorer",
-                                "SystemSettings",
-                                "PhoneExperienceHost",
-                                "YomiNinja",
-                                "Taskmgr",
-                                "Bitwarden"
-                            };
-
-                            using (StreamWriter writer = new StreamWriter(outputFilePath, true))
-                            {
-                                var runningApplications = ProcessUtils.GetManagerInstance().GetRunningApplications();
-
-                                // Use LINQ to filter out the paths based on the exclusions
-                                var processPaths = runningApplications
-                                    .Select(app => app.FileName)        // Assuming FileName is the full path
-                                    .Where(path => !string.IsNullOrEmpty(path) && 
-                                                   !exclusions.Any(exclusion => path.IndexOf(exclusion, StringComparison.OrdinalIgnoreCase) >= 0))
-                                    .Distinct()
-                                    .ToList();
-
-                                foreach (var processPath in processPaths)
-                                {
-                                    try
-                                    {
-                                        // Fetch all processes with the exact path
-                                        var matchingProcesses = Process.GetProcesses()
-                                            .Where(p => 
-                                            {
-                                                try
-                                                {
-                                                    return p.MainModule.FileName.Equals(processPath, StringComparison.OrdinalIgnoreCase);
-                                                }
-                                                catch
-                                                {
-                                                    return false; // Inaccessible process might throw exceptions
-                                                }
-                                            })
-                                            .ToList();
-
-                                        // Terminate each found process
-                                        foreach (var process in matchingProcesses)
-                                        {
-                                            Console.WriteLine($"Terminating process: {process.ProcessName}, ID: {process.Id}");
-                                            process.Kill();
-                                            process.WaitForExit();
-                                        }
-
-                                        // Restart the process
-                                        Process.Start(processPath);
-                                        Console.WriteLine($"Restarted process: {processPath}");
-
-                                        // Writing to output file
-                                        writer.WriteLine($"Restarted process: {processPath}");
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine($"An error occurred while processing {processPath}: {ex.Message}");
-                                    }
-                                }
-                            }
-                    return true;
-                version: 1.0.0.0
-                position:
-                  x: 1981
-                  y: 1338
-                variables:
-                  - name: csharpScriptResult
-                    value: result
-                children: []
-                comment: ""
-            comment: ""
-        comment: ""
-    comment: ""
-  - id: 1
-    version: 1.0.0.0
-    comment: ""
 name: Restart all windows
 author: eristocrates
+description: None
+enable: true
 iconGlyph: 
 icon:
   value: 
-description: None
-enable: true
 taskProjectSettings:
   id: 4e358394-20ba-4960-9a91-af19b1ba303e
   showSettingPage: false
   projectSettings: []
+zoom: 1.0057686956942056
+offsetX: 0
+offsetY: 0
+children:
+- id: 0
+  type: Result selector
+  model:
+    name:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    context:
+      text: '*.exe'
+      textMatchType: Wildcard
+      matchCase: false
+    tag:
+      tag: windows
+    searchApp:
+      selectedItem:
+        value: Any
+  version: 1.1.0.0
+  position:
+    x: 1389
+    y: 1325
+  variables:
+  - name: searchResult
+    value: result
+  - name: path
+    value: result.Context
+  children:
+  - id: 1
+    type: Custom operation
+    model:
+      name: Restart all windows
+      iconGlyph: 
+      icon:
+        value: 
+      keyGesture: Ctrl+Alt+R
+      selected: false
+      position: 7
+    version: 1.0.0.0
+    position:
+      x: 1590
+      y: 1318
+    variables:
+    - name: myvar
+      value: result
+    children:
+    - id: 2
+      type: Hide search window
+      version: 1.0.0.0
+      position:
+        x: 1786
+        y: 1326
+      variables:
+      - name: myvar
+        value: result
+      children:
+      - id: 3
+        type: C# Script
+        model:
+          enableVariableInline: false
+          content: >-
+            using System;
+
+            using System.Linq;
+
+            using System.Diagnostics;
+
+            using System.IO;
+
+            using Blast.Core.Objects;
+
+            using Blast.API.Processes;
+
+                    string outputFilePath = @"C:\Users\eristocrates\AppData\Roaming\Blast\Tasks\output.txt";
+                    string[] exclusions = {
+                        "seelen-ui",
+                        "WindowsTerminal",
+                        "Everything",
+                        "ProtonVPN",
+                        "hitomi_downloader_GUI",
+                        "komorebi-gui",
+                        "TheBrain",
+                        "explorer",
+                        "SystemSettings",
+                        "PhoneExperienceHost",
+                        "YomiNinja",
+                        "Taskmgr",
+                        "Bitwarden"
+                    };
+
+                    using (StreamWriter writer = new StreamWriter(outputFilePath, true))
+                    {
+                        var runningApplications = ProcessUtils.GetManagerInstance().GetRunningApplications();
+
+                        // Use LINQ to filter out the paths based on the exclusions
+                        var processPaths = runningApplications
+                            .Select(app => app.FileName)        // Assuming FileName is the full path
+                            .Where(path => !string.IsNullOrEmpty(path) && 
+                                           !exclusions.Any(exclusion => path.IndexOf(exclusion, StringComparison.OrdinalIgnoreCase) >= 0))
+                            .Distinct()
+                            .ToList();
+
+                        foreach (var processPath in processPaths)
+                        {
+                            try
+                            {
+                                // Fetch all processes with the exact path
+                                var matchingProcesses = Process.GetProcesses()
+                                    .Where(p => 
+                                    {
+                                        try
+                                        {
+                                            return p.MainModule.FileName.Equals(processPath, StringComparison.OrdinalIgnoreCase);
+                                        }
+                                        catch
+                                        {
+                                            return false; // Inaccessible process might throw exceptions
+                                        }
+                                    })
+                                    .ToList();
+
+                                // Terminate each found process
+                                foreach (var process in matchingProcesses)
+                                {
+                                    Console.WriteLine($"Terminating process: {process.ProcessName}, ID: {process.Id}");
+                                    process.Kill();
+                                    process.WaitForExit();
+                                }
+
+                                // Restart the process
+                                Process.Start(processPath);
+                                Console.WriteLine($"Restarted process: {processPath}");
+
+                                // Writing to output file
+                                writer.WriteLine($"Restarted process: {processPath}");
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"An error occurred while processing {processPath}: {ex.Message}");
+                            }
+                        }
+                    }
+            return true;
+        version: 1.0.0.0
+        position:
+          x: 1981
+          y: 1338
+        variables:
+        - name: csharpScriptResult
+          value: result
+        children: []
+        comment: ''
+      comment: ''
+    comment: ''
+  comment: ''
+- id: 1
+  version: 1.0.0.0
+  comment: ''

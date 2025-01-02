@@ -1,4 +1,15 @@
-zoom: 0.7200000000000003
+name: Open Window Mouse Move
+author: eristocrates
+description: on switch to window, move mouse via komorebi
+enable: true
+iconGlyph: 
+icon:
+  value: 
+taskProjectSettings:
+  id: eea870b9-2fc2-4ed8-9629-238d7a5bfd2f
+  showSettingPage: false
+  projectSettings: []
+zoom: 0.8640000000000008
 offsetX: 0
 offsetY: 0
 children:
@@ -25,6 +36,8 @@ children:
   variables:
   - name: searchResult
     value: result
+  - name: windowTitle
+    value: result.DisplayedName
   children:
   - id: 1
     type: Custom operation
@@ -60,8 +73,8 @@ children:
           delayInMS: 250
         version: 1.0.0.0
         position:
-          x: 1650
-          y: 1358
+          x: 1020
+          y: 1449
         variables:
         - name: myvar
           value: result
@@ -80,8 +93,8 @@ children:
             goToPrevious: false
           version: 1.0.0.0
           position:
-            x: 1051
-            y: 1512
+            x: 1230
+            y: 1459
           variables:
           - name: process
             value: result
@@ -89,11 +102,11 @@ children:
           - id: 5
             type: Delay
             model:
-              delayInMS: 100
+              delayInMS: 250
             version: 1.0.0.0
             position:
-              x: 1267
-              y: 1539
+              x: 1458
+              y: 1448
             variables:
             - name: myvar
               value: result
@@ -108,26 +121,12 @@ children:
                 content: komorebic promote
               version: 1.0.0.0
               position:
-                x: 1477
-                y: 1539
+                x: 1231
+                y: 1614
               variables:
               - name: powershellScriptResult
                 value: result
-              children:
-              - id: 7
-                type: C# Script
-                model:
-                  enableVariableInline: true
-                  content: "using System;\r\nusing System.Diagnostics;\r\nusing System.IO;\r\n\r\n var output = \"\";\r\n string outputFilePath = @\"C:\\Users\\eristocrates\\AppData\\Roaming\\Blast\\Tasks\\output.txt\";\r\n\r\ntry{\r\nProcess cmd = new Process();\r\ncmd.StartInfo.FileName = @\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\";\r\ncmd.StartInfo.RedirectStandardInput = true;\r\ncmd.StartInfo.RedirectStandardOutput = true;\r\ncmd.StartInfo.CreateNoWindow = true;\r\ncmd.StartInfo.UseShellExecute = false;\r\ncmd.Start();\r\n\r\n           \r\n  output = cmd.StandardOutput.ReadToEnd();\r\n   \r\n     File.WriteAllText(outputFilePath, \"test\");\r\n        \r\n}catch (Exception ex)\r\n        {\r\n            Console.WriteLine($\"An error occurred: {ex.Message}\");\r\n        }\r\n return output;"
-                version: 1.0.0.0
-                position:
-                  x: 1035
-                  y: 1692
-                variables:
-                - name: csharpScriptResult
-                  value: result
-                children: []
-                comment: ''
+              children: []
               comment: ''
             comment: ''
           comment: ''
@@ -139,16 +138,91 @@ children:
   version: 1.0.0.0
   comment: ''
 - id: 7
+  type: C# Script
+  model:
+    enableVariableInline: true
+    content: >-
+      using System;
+
+      using System.Runtime.InteropServices;
+
+
+      // Import necessary Windows API functions
+
+      [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+
+      static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+
+      [DllImport("user32.dll", SetLastError = true)]
+
+      static extern int GetWindowLong(IntPtr hwnd, int nIndex);
+
+
+      [DllImport("user32.dll", SetLastError = true)]
+
+      static extern int SetWindowLong(IntPtr hwnd, int nIndex, int dwNewLong);
+
+
+      [DllImport("user32.dll", SetLastError = true)]
+
+      static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint crKey, byte bAlpha, uint dwFlags);
+
+
+      [DllImport("user32.dll")]
+
+      static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
+
+
+      const int GWL_EXSTYLE = -20;
+
+      const int WS_EX_LAYERED = 0x00080000;
+
+      const uint LWA_ALPHA = 0x2;
+
+      const int SW_MINIMIZE = 6;
+
+      const int SW_RESTORE = 9;
+
+
+      // Assume windowTitle is defined externally
+
+      IntPtr hWnd = FindWindow(null, windowTitle);
+
+      if (hWnd != IntPtr.Zero)
+
+      {
+          // Check if the window has a layered style
+          int currentStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
+          if ((currentStyle & WS_EX_LAYERED) == WS_EX_LAYERED)
+          {
+              // Set the window's alpha to 255 (fully opaque)
+              SetLayeredWindowAttributes(hWnd, 0, 255, LWA_ALPHA);
+
+              // Remove the layered style
+              currentStyle &= ~WS_EX_LAYERED;
+              SetWindowLong(hWnd, GWL_EXSTYLE, currentStyle);
+
+              // Minimize the window
+              ShowWindow(hWnd, SW_MINIMIZE);
+
+              // Restore the window
+              ShowWindow(hWnd, SW_RESTORE);
+          }
+
+          return true;
+      }
+
+      return false;
+  version: 1.0.0.0
+  position:
+    x: 1023
+    y: 1604
+  variables:
+  - name: csharpScriptResult
+    value: result
+  children: []
+  comment: ''
+- id: 7
   version: 1.0.0.0
   comment: ''
-name: Open Window Mouse Move
-author: eristocrates
-iconGlyph: 
-icon:
-  value: 
-description: on switch to window, move mouse via komorebi
-enable: true
-taskProjectSettings:
-  id: eea870b9-2fc2-4ed8-9629-238d7a5bfd2f
-  showSettingPage: false
-  projectSettings: []

@@ -1,47 +1,47 @@
-zoom: 1.0057686956942056
-offsetX: 0
-offsetY: 0
-children:
-  - id: 0
-    type: Hotkey
-    model:
-      hotkey:
-        name: Hotkey Task trigger
-        hotKeys:
-          - F13
-      bindFromVariable: false
-      variableName: ""
-    version: 1.0.0.0
-    position:
-      x: 1527
-      y: 1367
-    variables:
-      - name: myvar
-        value: result
-    children:
-      - id: 1
-        type: C# Script
-        model:
-          enableVariableInline: false
-          content: "using System;\r\nusing System.Linq;\r\nusing System.Reflection;\r\nusing System.Diagnostics;\r\nusing Blast.Core.Objects;\r\nusing Blast.API.Processes;\r\n\r\n\r\n   string reflectionFilePath = @\"C:\\Users\\eristocrates\\AppData\\Roaming\\Blast\\Tasks\\reflection.txt\";\r\n\r\n        using (StreamWriter writer = new StreamWriter(reflectionFilePath, false)) // 'false' overwrites the file\r\n        {\r\n            Type processInfoType = typeof(ProcessInfo);\r\n            \r\n            // Print properties\r\n            writer.WriteLine(\"Properties:\");\r\n            foreach (var prop in processInfoType.GetProperties())\r\n            {\r\n                writer.WriteLine($\"{prop.Name} : {prop.PropertyType}\");\r\n            }\r\n\r\n            // Print methods\r\n            writer.WriteLine(\"\\nMethods:\");\r\n            foreach (var method in processInfoType.GetMethods())\r\n            {\r\n                writer.WriteLine($\"{method.Name}() : {method.ReturnType}\");\r\n            }\r\n        }\r\n        \r\n return true;"
-        version: 1.0.0.0
-        position:
-          x: 1768
-          y: 1359
-        variables:
-          - name: csharpScriptResult
-            value: result
-        children: []
-        comment: ""
-    comment: ""
 name: Reflection
 author: eristocrates
+description: basic reflection for the undocumented api
+enable: true
 iconGlyph: 
 icon:
   value: 
-description: basic reflection for the undocumented api
-enable: false
 taskProjectSettings:
   id: 2be1b8d3-c28a-4eda-8851-edcbe8c24b3f
   showSettingPage: false
   projectSettings: []
+zoom: 1.183632734530938
+offsetX: -544.7255489021957
+offsetY: -184.30938123752503
+children:
+- id: 0
+  type: Hotkey
+  model:
+    hotkey:
+      name: Hotkey Task trigger
+      hotKeys:
+      - F13
+    bindFromVariable: false
+    variableName: ''
+  version: 1.0.0.0
+  position:
+    x: 1527
+    y: 1367
+  variables:
+  - name: myvar
+    value: result
+  children:
+  - id: 1
+    type: C# Script
+    model:
+      enableVariableInline: false
+      content: "using System;\r\nusing System.Linq;\r\nusing System.Reflection;\r\nusing System.Diagnostics;\r\nusing Blast.Core.Objects;\r\nusing Blast.API.Processes;\r\n\r\n\r\n   string reflectionFilePath = @\"C:\\Users\\eristocrates\\AppData\\Roaming\\Blast\\Tasks\\reflection.txt\";\r\n\r\n        using (StreamWriter writer = new StreamWriter(reflectionFilePath, false)) // 'false' overwrites the file\r\n        {\r\n            Type processInfoType = typeof(ProcessInfo);\r\n            \r\n            // Print properties\r\n            writer.WriteLine(\"Properties:\");\r\n            foreach (var prop in processInfoType.GetProperties())\r\n            {\r\n                writer.WriteLine($\"{prop.Name} : {prop.PropertyType}\");\r\n            }\r\n\r\n            // Print methods\r\n            writer.WriteLine(\"\\nMethods:\");\r\n            foreach (var method in processInfoType.GetMethods())\r\n            {\r\n                writer.WriteLine($\"{method.Name}() : {method.ReturnType}\");\r\n            }\r\n        }\r\n        \r\n return true;"
+    version: 1.0.0.0
+    position:
+      x: 1768
+      y: 1359
+    variables:
+    - name: csharpScriptResult
+      value: result
+    children: []
+    comment: ''
+  comment: ''

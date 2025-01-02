@@ -1,0 +1,54 @@
+name: test
+author: eristocrates
+description: None
+enable: true
+iconGlyph: 
+icon:
+  value: 
+taskProjectSettings:
+  id: f5f119a5-46db-48d1-889d-1013d52dcb7a
+  showSettingPage: false
+  projectSettings: []
+zoom: 1.0057686956942056
+offsetX: 0
+offsetY: 0
+children:
+- id: 0
+  type: Search
+  model:
+    searchPrefix: ''
+    searchedTagExact: hello
+    searchTagIcon:
+      value: 
+    searchedText:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    searchType: SearchAll
+  version: 1.0.0.0
+  position:
+    x: 1250
+    y: 1376
+  variables:
+  - name: searchText
+    value: result.SearchedText
+  - name: searchTag
+    value: result.SearchedTag
+  children:
+  - id: 1
+    type: Show notification
+    model:
+      title: Fluent Search notification
+      content: hello detected
+      sound: Default
+      silent: false
+    version: 1.0.0.0
+    position:
+      x: 1491
+      y: 1385
+    variables:
+    - name: myvar
+      value: result
+    children: []
+    comment: ''
+  comment: ''

@@ -1,0 +1,165 @@
+name: Komorebi Transparency Fix
+author: eristocrates
+description: 'checks for windows stuck in layered state, removes transparency, and mimimizes/restores the window so komorebi can manage it again '
+enable: true
+iconGlyph: 
+icon:
+  value: 
+taskProjectSettings:
+  id: e40a5367-d007-4782-b82c-5b9f05657c7d
+  showSettingPage: false
+  projectSettings: []
+zoom: 0.8640000000000008
+offsetX: 0
+offsetY: 0
+children:
+- id: 0
+  type: Process switched
+  model:
+    newProcess:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    newProcessTitle:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    newMatchOnlyDialogs: false
+    oldProcess:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    oldProcessTitle:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    oldMatchOnlyDialogs: false
+  version: 1.0.0.0
+  position:
+    x: 1449
+    y: 1572
+  variables:
+  - name: processSwitchEvent
+    value: result
+  - name: hWnd
+    value: result.NewProcess.WindowId
+  children:
+  - id: 1
+    type: Delay
+    model:
+      delayInMS: 1000
+    version: 1.0.0.0
+    position:
+      x: 1615
+      y: 1728
+    variables:
+    - name: myvar
+      value: result
+    children:
+    - id: 2
+      type: C# Script
+      model:
+        enableVariableInline: true
+        content: >-
+          using System;
+
+          using System.Runtime.InteropServices;
+
+
+          // Import necessary Windows API functions
+
+          [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+
+          static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+
+          [DllImport("user32.dll", SetLastError = true)]
+
+          static extern int GetWindowLong(IntPtr hwnd, int nIndex);
+
+
+          [DllImport("user32.dll", SetLastError = true)]
+
+          static extern int SetWindowLong(IntPtr hwnd, int nIndex, int dwNewLong);
+
+
+          [DllImport("user32.dll", SetLastError = true)]
+
+          static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint crKey, byte bAlpha, uint dwFlags);
+
+
+          [DllImport("user32.dll")]
+
+          static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
+
+
+          const int GWL_EXSTYLE = -20;
+
+          const int WS_EX_LAYERED = 0x00080000;
+
+          const uint LWA_ALPHA = 0x2;
+
+          const int SW_MINIMIZE = 6;
+
+          const int SW_RESTORE = 9;
+
+
+
+          if (hWnd != IntPtr.Zero)
+
+          {
+              // Check if the window has a layered style
+              int currentStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
+              if ((currentStyle & WS_EX_LAYERED) == WS_EX_LAYERED)
+              {
+                  // Set the window's alpha to 255 (fully opaque)
+                  SetLayeredWindowAttributes(hWnd, 0, 255, LWA_ALPHA);
+
+                  // Remove the layered style
+                  currentStyle &= ~WS_EX_LAYERED;
+                  SetWindowLong(hWnd, GWL_EXSTYLE, currentStyle);
+
+                  // Minimize the window
+                  ShowWindow(hWnd, SW_MINIMIZE);
+
+                  // Restore the window
+                  ShowWindow(hWnd, SW_RESTORE);
+              }
+
+              return true;
+          }
+
+          return false;
+      version: 1.0.0.0
+      position:
+        x: 1823
+        y: 1654
+      variables:
+      - name: csharpScriptResult
+        value: result
+      children: []
+      comment: ''
+    comment: ''
+  comment: ''
+- id: 3
+  type: Show notification
+  model:
+    title: Fluent Search notification
+    content: '{hWnd}'
+    sound: Default
+    silent: false
+  version: 1.0.0.0
+  position:
+    x: 1685
+    y: 1520
+  variables:
+  - name: myvar
+    value: result
+  children: []
+  comment: ''
+- id: 3
+  version: 1.0.0.0
+  comment: ''
+- id: 1
+  version: 1.0.0.0
+  comment: ''
