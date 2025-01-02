@@ -1,7 +1,7 @@
 name: Reflection
 author: eristocrates
 description: basic reflection for the undocumented api
-enable: true
+enable: false
 iconGlyph: 
 icon:
   value: 

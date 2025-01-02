@@ -1,7 +1,7 @@
 name: Komorebi Transparency Fix
 author: eristocrates
 description: 'checks for windows stuck in layered state, removes transparency, and mimimizes/restores the window so komorebi can manage it again '
-enable: true
+enable: false
 iconGlyph: 
 icon:
   value: 
@@ -9,9 +9,9 @@ taskProjectSettings:
   id: e40a5367-d007-4782-b82c-5b9f05657c7d
   showSettingPage: false
   projectSettings: []
-zoom: 0.8640000000000008
-offsetX: 0
-offsetY: 0
+zoom: 0.7823218997361477
+offsetX: 112.94327176781007
+offsetY: 219.73021108179432
 children:
 - id: 0
   type: Process switched
@@ -43,11 +43,13 @@ children:
     value: result
   - name: hWnd
     value: result.NewProcess.WindowId
+  - name: name
+    value: result.NewProcess.ProcessName
   children:
   - id: 1
     type: Delay
     model:
-      delayInMS: 2000
+      delayInMS: 2500
     version: 1.0.0.0
     position:
       x: 1486
@@ -134,7 +136,7 @@ children:
       version: 1.0.0.0
       position:
         x: 1704
-        y: 1540
+        y: 1559
       variables:
       - name: csharpScriptResult
         value: result
@@ -185,26 +187,29 @@ children:
         comment: ''
       comment: ''
     comment: ''
-  comment: ''
-- id: 6
-  type: Show notification
-  model:
-    title: Fluent Search notification
-    content: '{hWnd}'
-    sound: Default
-    silent: false
-  version: 1.0.0.0
-  position:
-    x: 1686
-    y: 1429
-  variables:
-  - name: myvar
-    value: result
-  children: []
+  - id: 6
+    type: Show notification
+    model:
+      title: Fluent Search notification
+      content: '{name}'
+      sound: Default
+      silent: false
+    version: 1.0.0.0
+    position:
+      x: 1669
+      y: 1427
+    variables:
+    - name: myvar
+      value: result
+    children: []
+    comment: ''
   comment: ''
 - id: 1
   version: 1.0.0.0
   comment: ''
 - id: 3
+  version: 1.0.0.0
+  comment: ''
+- id: 6
   version: 1.0.0.0
   comment: ''
