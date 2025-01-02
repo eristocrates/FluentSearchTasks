@@ -36,8 +36,8 @@ children:
     oldMatchOnlyDialogs: false
   version: 1.0.0.0
   position:
-    x: 1449
-    y: 1572
+    x: 1444
+    y: 1476
   variables:
   - name: processSwitchEvent
     value: result
@@ -47,11 +47,11 @@ children:
   - id: 1
     type: Delay
     model:
-      delayInMS: 1000
+      delayInMS: 2000
     version: 1.0.0.0
     position:
-      x: 1615
-      y: 1728
+      x: 1486
+      y: 1647
     variables:
     - name: myvar
       value: result
@@ -124,24 +124,69 @@ children:
 
                   // Restore the window
                   ShowWindow(hWnd, SW_RESTORE);
+                  return true;
               }
 
-              return true;
+              return false;
           }
 
           return false;
       version: 1.0.0.0
       position:
-        x: 1823
-        y: 1654
+        x: 1704
+        y: 1540
       variables:
       - name: csharpScriptResult
         value: result
-      children: []
+      children:
+      - id: 3
+        type: Condition
+        model:
+          value: '{csharpScriptResult == true}'
+          continueIfTrue: true
+        version: 1.0.0.0
+        position:
+          x: 1682
+          y: 1726
+        variables:
+        - name: myvar
+          value: result
+        children:
+        - id: 4
+          type: Delay
+          model:
+            delayInMS: 512
+          version: 1.0.0.0
+          position:
+            x: 1877
+            y: 1714
+          variables:
+          - name: myvar
+            value: result
+          children:
+          - id: 5
+            type: PS Script
+            model:
+              powerShellExe: pwsh.exe
+              stopOnError: true
+              runAsAdmin: false
+              showWindow: false
+              content: komorebic promote-focus
+            version: 1.0.0.0
+            position:
+              x: 1942
+              y: 1570
+            variables:
+            - name: powershellScriptResult
+              value: result
+            children: []
+            comment: ''
+          comment: ''
+        comment: ''
       comment: ''
     comment: ''
   comment: ''
-- id: 3
+- id: 6
   type: Show notification
   model:
     title: Fluent Search notification
@@ -150,16 +195,16 @@ children:
     silent: false
   version: 1.0.0.0
   position:
-    x: 1685
-    y: 1520
+    x: 1686
+    y: 1429
   variables:
   - name: myvar
     value: result
   children: []
   comment: ''
-- id: 3
+- id: 1
   version: 1.0.0.0
   comment: ''
-- id: 1
+- id: 3
   version: 1.0.0.0
   comment: ''
