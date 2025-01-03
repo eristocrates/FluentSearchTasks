@@ -49,7 +49,7 @@ children:
       icon:
         value: 
       keyGesture: Ctrl+Alt+O
-      selected: true
+      selected: false
       position: 2
     version: 1.0.0.0
     position:
