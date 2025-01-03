@@ -72,7 +72,7 @@ children:
       - id: 3
         type: Delay
         model:
-          delayInMS: 250
+          delayInMS: 128
         version: 1.0.0.0
         position:
           x: 1020
@@ -104,7 +104,7 @@ children:
           - id: 5
             type: Delay
             model:
-              delayInMS: 256
+              delayInMS: 512
             version: 1.0.0.0
             position:
               x: 1458
@@ -199,28 +199,41 @@ children:
                 value: result
               children:
               - id: 7
-                type: PS Script
+                type: Delay
                 model:
-                  powerShellExe: pwsh.exe
-                  stopOnError: true
-                  runAsAdmin: false
-                  showWindow: false
-                  content: >-
-                    $identifier = [System.IO.Path]::GetFileNameWithoutExtension($processName)
-
-                    komorebic eager-focus "$identifier.exe"
-
-                    # Read-Host "$identifier.exe"
-
-                    # komorebic promote
+                  delayInMS: 1023
                 version: 1.0.0.0
                 position:
-                  x: 1232
-                  y: 1598
+                  x: 1222
+                  y: 1599
                 variables:
-                - name: powershellScriptResult
+                - name: myvar
                   value: result
-                children: []
+                children:
+                - id: 8
+                  type: PS Script
+                  model:
+                    powerShellExe: pwsh.exe
+                    stopOnError: true
+                    runAsAdmin: false
+                    showWindow: false
+                    content: >-
+                      $identifier = [System.IO.Path]::GetFileNameWithoutExtension($processName)
+
+                      komorebic eager-focus "$identifier.exe"
+
+                      # Read-Host "$identifier.exe"
+
+                      # komorebic promote
+                  version: 1.0.0.0
+                  position:
+                    x: 1451
+                    y: 1598
+                  variables:
+                  - name: powershellScriptResult
+                    value: result
+                  children: []
+                  comment: ''
                 comment: ''
               comment: ''
             comment: ''
@@ -235,7 +248,7 @@ children:
 - id: 6
   version: 1.0.0.0
   comment: ''
-- id: 8
+- id: 9
   type: Show notification
   model:
     title: Fluent Search notification
@@ -251,6 +264,6 @@ children:
     value: result
   children: []
   comment: ''
-- id: 8
+- id: 9
   version: 1.0.0.0
   comment: ''
