@@ -1,6 +1,17 @@
-zoom: 0.6984504831209762
-offsetX: -228.48845306776997
-offsetY: 438.2870248849674
+name: Komorebi Swap Open
+author: eristocrates
+description: None
+enable: true
+iconGlyph: 
+icon:
+  value: 
+taskProjectSettings:
+  id: 9eb2250d-a9e6-4535-a5a2-d0223d1b1a51
+  showSettingPage: false
+  projectSettings: []
+zoom: 0.34142581888246626
+offsetX: 1204.6666666666667
+offsetY: 970.7899807321774
 children:
 - id: 0
   type: Result selector
@@ -20,8 +31,8 @@ children:
         value: Any
   version: 1.1.0.0
   position:
-    x: 1707
-    y: 1455
+    x: 50
+    y: 1490
   variables:
   - name: searchResult
     value: result
@@ -38,8 +49,8 @@ children:
       position: 2
     version: 1.0.0.0
     position:
-      x: 1921
-      y: 1457
+      x: 260
+      y: 1490
     variables:
     - name: myvar
       value: result
@@ -48,8 +59,8 @@ children:
       type: Hide search window
       version: 1.0.0.0
       position:
-        x: 2113
-        y: 1455
+        x: 470
+        y: 1490
       variables:
       - name: myvar
         value: result
@@ -60,8 +71,8 @@ children:
           delayInMS: 250
         version: 1.0.0.0
         position:
-          x: 2220
-          y: 1300
+          x: 680
+          y: 1490
         variables:
         - name: myvar
           value: result
@@ -76,8 +87,8 @@ children:
             content: komorebic minimize
           version: 1.0.0.0
           position:
-            x: 2330
-            y: 1452
+            x: 890
+            y: 1490
           variables:
           - name: myvar
             value: result
@@ -90,8 +101,8 @@ children:
               arguments: ''
             version: 1.0.0.0
             position:
-              x: 2550
-              y: 1458
+              x: 1100
+              y: 1490
             variables:
             - name: myvar
               value: result
@@ -102,8 +113,8 @@ children:
                 delayInMS: 1000
               version: 1.0.0.0
               position:
-                x: 2703
-                y: 1302
+                x: 1310
+                y: 1490
               variables:
               - name: myvar
                 value: result
@@ -118,8 +129,8 @@ children:
                   content: komorebic promote
                 version: 1.0.0.0
                 position:
-                  x: 2741
-                  y: 1467
+                  x: 1520
+                  y: 1490
                 variables:
                 - name: myvar
                   value: result
@@ -135,14 +146,3 @@ children:
 - id: 1
   version: 1.0.0.0
   comment: ''
-name: komorebi open swap
-author: eristocrates
-iconGlyph: 
-icon:
-  value: 
-description: None
-enable: true
-taskProjectSettings:
-  id: c80d3be7-148b-461a-9604-d18ae18bc33d
-  showSettingPage: false
-  projectSettings: []

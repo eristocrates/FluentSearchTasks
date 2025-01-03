@@ -35,8 +35,8 @@ children:
     type: Hide search window
     version: 1.0.0.0
     position:
-      x: 1597
-      y: 1540
+      x: 1575
+      y: 1514
     variables:
     - name: myvar
       value: result
@@ -76,8 +76,8 @@ children:
           Start-Process -FilePath $searchContext -NoNewWindow -PassThru
       version: 1.0.0.0
       position:
-        x: 1837
-        y: 1536
+        x: 1834
+        y: 1510
       variables:
       - name: powershellScriptResult
         value: result

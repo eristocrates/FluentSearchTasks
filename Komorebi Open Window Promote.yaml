@@ -1,17 +1,17 @@
-name: Open Window Mouse Move
+name: Komorebi Open Window Promote
 author: eristocrates
-description: on switch to window, move mouse via komorebi
+description: retooled switch to window for komorebi support
 enable: true
-iconGlyph: 
+iconGlyph: 
 icon:
-  value: 
+  value: 
 taskProjectSettings:
-  id: eea870b9-2fc2-4ed8-9629-238d7a5bfd2f
+  id: e6bffcf8-ee96-4cc3-a8c6-1450abeba9d0
   showSettingPage: false
   projectSettings: []
-zoom: 0.8640000000000008
-offsetX: 0
-offsetY: 0
+zoom: 0.7245877430470098
+offsetX: 544.6310607925176
+offsetY: 459.91467716793807
 children:
 - id: 0
   type: Result selector
@@ -38,17 +38,19 @@ children:
     value: result
   - name: windowTitle
     value: result.DisplayedName
+  - name: processName
+    value: result.ProcessInfo.ProcessName
   children:
   - id: 1
     type: Custom operation
     model:
-      name: Open Window
+      name: Open Window Promote
       iconGlyph: 
       icon:
         value: 
-      keyGesture: Alt+O
+      keyGesture: Ctrl+Alt+O
       selected: true
-      position: 1
+      position: 2
     version: 1.0.0.0
     position:
       x: 1208
@@ -93,8 +95,8 @@ children:
             goToPrevious: false
           version: 1.0.0.0
           position:
-            x: 1230
-            y: 1459
+            x: 1226
+            y: 1463
           variables:
           - name: process
             value: result
@@ -102,7 +104,7 @@ children:
           - id: 5
             type: Delay
             model:
-              delayInMS: 250
+              delayInMS: 256
             version: 1.0.0.0
             position:
               x: 1458
@@ -199,15 +201,15 @@ children:
               - id: 7
                 type: PS Script
                 model:
-                  powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+                  powerShellExe: pwsh.exe
                   stopOnError: true
                   runAsAdmin: false
                   showWindow: false
                   content: komorebic promote
                 version: 1.0.0.0
                 position:
-                  x: 1257
-                  y: 1602
+                  x: 1232
+                  y: 1598
                 variables:
                 - name: powershellScriptResult
                   value: result
@@ -224,5 +226,24 @@ children:
   version: 1.0.0.0
   comment: ''
 - id: 6
+  version: 1.0.0.0
+  comment: ''
+- id: 8
+  type: Show notification
+  model:
+    title: Fluent Search notification
+    content: '{processName}'
+    sound: Default
+    silent: false
+  version: 1.0.0.0
+  position:
+    x: 1316
+    y: 1146
+  variables:
+  - name: myvar
+    value: result
+  children: []
+  comment: ''
+- id: 8
   version: 1.0.0.0
   comment: ''

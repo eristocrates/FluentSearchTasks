@@ -1,34 +1,30 @@
-name: Add clipboard to web search
+name: Selected text to web search
 author: eristocrates
-description: auto adds clipboard only on web search task
+description: Boosted copy shortcut
 enable: true
 iconGlyph: 
 icon:
   value: 
 taskProjectSettings:
-  id: fc0ab959-97b6-483a-b900-7b9ae476e981
+  id: 9b7097c4-af4a-4e98-b737-727bd7817cda
   showSettingPage: false
   projectSettings: []
-zoom: 0.7749818181818182
-offsetX: 1204
-offsetY: 665.8181818181818
+zoom: 0.45089058524173026
+offsetX: 1204.6666666666667
+offsetY: 801.119592875318
 children:
 - id: 0
   type: Hotkey
   model:
     hotkey:
       name: Hotkey Task trigger
-      hotKeys:
-      - LCTRL
-      - LMENU
-      - LSHIFT
-      - T
+      hotKeys: []
     bindFromVariable: false
     variableName: ''
   version: 1.0.0.0
   position:
-    x: 30
-    y: 1436
+    x: 50
+    y: 1490
   variables:
   - name: myvar
     value: result
@@ -39,8 +35,8 @@ children:
       delayInMS: 250
     version: 1.0.0.0
     position:
-      x: 249
-      y: 1435
+      x: 260
+      y: 1490
     variables:
     - name: myvar
       value: result
@@ -54,8 +50,8 @@ children:
           - C
       version: 1.0.0.0
       position:
-        x: 31
-        y: 1578
+        x: 470
+        y: 1490
       variables:
       - name: myvar
         value: result
@@ -66,8 +62,8 @@ children:
           delayInMS: 333
         version: 1.0.0.0
         position:
-          x: 242
-          y: 1582
+          x: 680
+          y: 1490
         variables:
         - name: myvar
           value: result
@@ -77,8 +73,8 @@ children:
           model: {}
           version: 1.0.0.0
           position:
-            x: 426
-            y: 1686
+            x: 890
+            y: 1490
           variables:
           - name: clipboardText
             value: result
@@ -92,8 +88,8 @@ children:
                 - tag: Web
             version: 1.0.0.1
             position:
-              x: 134
-              y: 1743
+              x: 1100
+              y: 1490
             variables:
             - name: myvar
               value: result

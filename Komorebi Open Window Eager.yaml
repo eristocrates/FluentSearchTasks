@@ -1,0 +1,256 @@
+name: Komorebi Open Window Eager
+author: eristocrates
+description: None
+enable: true
+iconGlyph: 
+icon:
+  value: 
+taskProjectSettings:
+  id: 154d08d7-82e0-4528-b835-19cfd9ba9a9d
+  showSettingPage: false
+  projectSettings: []
+zoom: 0.7245877430470098
+offsetX: 544.6310607925176
+offsetY: 459.91467716793807
+children:
+- id: 0
+  type: Result selector
+  model:
+    name:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    context:
+      text: '*.*'
+      textMatchType: Wildcard
+      matchCase: false
+    tag:
+      tag: windows
+    searchApp:
+      selectedItem:
+        value: Any
+  version: 1.1.0.0
+  position:
+    x: 1019
+    y: 1314
+  variables:
+  - name: searchResult
+    value: result
+  - name: windowTitle
+    value: result.DisplayedName
+  - name: processName
+    value: result.ProcessInfo.ProcessName
+  children:
+  - id: 1
+    type: Custom operation
+    model:
+      name: Open Window
+      iconGlyph: 
+      icon:
+        value: 
+      keyGesture: Alt+O
+      selected: true
+      position: 1
+    version: 1.0.0.0
+    position:
+      x: 1208
+      y: 1321
+    variables:
+    - name: selectedSearchOperation
+      value: result
+    children:
+    - id: 2
+      type: Hide search window
+      version: 1.0.0.0
+      position:
+        x: 1437
+        y: 1319
+      variables:
+      - name: myvar
+        value: result
+      children:
+      - id: 3
+        type: Delay
+        model:
+          delayInMS: 250
+        version: 1.0.0.0
+        position:
+          x: 1020
+          y: 1449
+        variables:
+        - name: myvar
+          value: result
+        children:
+        - id: 4
+          type: Switch Process
+          model:
+            processName:
+              text: '*'
+              textMatchType: Wildcard
+              matchCase: false
+            processTitleContains:
+              text: '{searchResult.ResultName}'
+              textMatchType: Contains
+              matchCase: false
+            goToPrevious: false
+          version: 1.0.0.0
+          position:
+            x: 1226
+            y: 1463
+          variables:
+          - name: process
+            value: result
+          children:
+          - id: 5
+            type: Delay
+            model:
+              delayInMS: 256
+            version: 1.0.0.0
+            position:
+              x: 1458
+              y: 1448
+            variables:
+            - name: myvar
+              value: result
+            children:
+            - id: 6
+              type: C# Script
+              model:
+                enableVariableInline: true
+                content: >-
+                  using System;
+
+                  using System.Runtime.InteropServices;
+
+
+                  // Import necessary Windows API functions
+
+                  [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+
+                  static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+
+                  [DllImport("user32.dll", SetLastError = true)]
+
+                  static extern int GetWindowLong(IntPtr hwnd, int nIndex);
+
+
+                  [DllImport("user32.dll", SetLastError = true)]
+
+                  static extern int SetWindowLong(IntPtr hwnd, int nIndex, int dwNewLong);
+
+
+                  [DllImport("user32.dll", SetLastError = true)]
+
+                  static extern bool SetLayeredWindowAttributes(IntPtr hwnd, uint crKey, byte bAlpha, uint dwFlags);
+
+
+                  [DllImport("user32.dll")]
+
+                  static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
+
+
+                  const int GWL_EXSTYLE = -20;
+
+                  const int WS_EX_LAYERED = 0x00080000;
+
+                  const uint LWA_ALPHA = 0x2;
+
+                  const int SW_MINIMIZE = 6;
+
+                  const int SW_RESTORE = 9;
+
+
+                  // Assume windowTitle is defined externally
+
+                  IntPtr hWnd = FindWindow(null, windowTitle);
+
+                  if (hWnd != IntPtr.Zero)
+
+                  {
+                      // Check if the window has a layered style
+                      int currentStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
+                      if ((currentStyle & WS_EX_LAYERED) == WS_EX_LAYERED)
+                      {
+                          // Set the window's alpha to 255 (fully opaque)
+                          SetLayeredWindowAttributes(hWnd, 0, 255, LWA_ALPHA);
+
+                          // Remove the layered style
+                          currentStyle &= ~WS_EX_LAYERED;
+                          SetWindowLong(hWnd, GWL_EXSTYLE, currentStyle);
+
+                          // Minimize the window
+                          ShowWindow(hWnd, SW_MINIMIZE);
+
+                          // Restore the window
+                          ShowWindow(hWnd, SW_RESTORE);
+                      }
+
+                      return true;
+                  }
+
+                  return false;
+              version: 1.0.0.0
+              position:
+                x: 1023
+                y: 1604
+              variables:
+              - name: csharpScriptResult
+                value: result
+              children:
+              - id: 7
+                type: PS Script
+                model:
+                  powerShellExe: pwsh.exe
+                  stopOnError: true
+                  runAsAdmin: false
+                  showWindow: false
+                  content: >-
+                    $identifier = [System.IO.Path]::GetFileNameWithoutExtension($processName)
+
+                    komorebic eager-focus "$identifier.exe"
+
+                    # Read-Host "$identifier.exe"
+
+                    # komorebic promote
+                version: 1.0.0.0
+                position:
+                  x: 1232
+                  y: 1598
+                variables:
+                - name: powershellScriptResult
+                  value: result
+                children: []
+                comment: ''
+              comment: ''
+            comment: ''
+          comment: ''
+        comment: ''
+      comment: ''
+    comment: ''
+  comment: ''
+- id: 1
+  version: 1.0.0.0
+  comment: ''
+- id: 6
+  version: 1.0.0.0
+  comment: ''
+- id: 8
+  type: Show notification
+  model:
+    title: Fluent Search notification
+    content: '{processName}'
+    sound: Default
+    silent: false
+  version: 1.0.0.0
+  position:
+    x: 1316
+    y: 1146
+  variables:
+  - name: myvar
+    value: result
+  children: []
+  comment: ''
+- id: 8
+  version: 1.0.0.0
+  comment: ''

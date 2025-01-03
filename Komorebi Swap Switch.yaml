@@ -1,0 +1,169 @@
+name: Komorebi Swap Switch
+author: eristocrates
+description: None
+enable: true
+iconGlyph: 
+icon:
+  value: 
+taskProjectSettings:
+  id: 7a11ce77-5184-4c88-8614-b7aa4aa7ad02
+  showSettingPage: false
+  projectSettings: []
+zoom: 1.0057686956942056
+offsetX: -1007.6394204159493
+offsetY: 33.22160208068249
+children:
+- id: 0
+  type: Result selector
+  model:
+    name:
+      text: ''
+      textMatchType: Contains
+      matchCase: false
+    context:
+      text: '*.*'
+      textMatchType: Wildcard
+      matchCase: false
+    tag:
+      tag: windows
+    searchApp:
+      selectedItem:
+        value: Any
+  version: 1.1.0.0
+  position:
+    x: 1707
+    y: 1455
+  variables:
+  - name: searchResult
+    value: result
+  - name: windowTitle
+    value: result.ResultName
+  children:
+  - id: 1
+    type: Custom operation
+    model:
+      name: Komorebi Swap
+      iconGlyph: 
+      icon:
+        value: 
+      keyGesture: Alt+S
+      selected: false
+      position: 2
+    version: 1.0.0.0
+    position:
+      x: 1921
+      y: 1457
+    variables:
+    - name: myvar
+      value: result
+    children:
+    - id: 2
+      type: Hide search window
+      version: 1.0.0.0
+      position:
+        x: 2111
+        y: 1455
+      variables:
+      - name: myvar
+        value: result
+      children:
+      - id: 3
+        type: Delay
+        model:
+          delayInMS: 250
+        version: 1.0.0.0
+        position:
+          x: 2139
+          y: 1272
+        variables:
+        - name: myvar
+          value: result
+        children:
+        - id: 4
+          type: PS Script
+          model:
+            powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+            stopOnError: true
+            runAsAdmin: false
+            showWindow: false
+            content: komorebic minimize
+          version: 1.0.0.0
+          position:
+            x: 2302
+            y: 1457
+          variables:
+          - name: myvar
+            value: result
+          children:
+          - id: 5
+            type: Delay
+            model:
+              delayInMS: 250
+            version: 1.0.0.0
+            position:
+              x: 2378
+              y: 1313
+            variables:
+            - name: myvar
+              value: result
+            children:
+            - id: 6
+              type: Switch Process
+              model:
+                processName:
+                  text: '*'
+                  textMatchType: Wildcard
+                  matchCase: false
+                processTitleContains:
+                  text: '{searchResult.ResultName}'
+                  textMatchType: Exact
+                  matchCase: false
+                goToPrevious: false
+              version: 1.0.0.0
+              position:
+                x: 2503
+                y: 1447
+              variables:
+              - name: process
+                value: result
+              children:
+              - id: 7
+                type: Delay
+                model:
+                  delayInMS: 500
+                version: 1.0.0.0
+                position:
+                  x: 2590
+                  y: 1297
+                variables:
+                - name: myvar
+                  value: result
+                children:
+                - id: 8
+                  type: PS Script
+                  model:
+                    powerShellExe: C:\Program Files\PowerShell\7\pwsh.exe
+                    stopOnError: true
+                    runAsAdmin: false
+                    showWindow: false
+                    content: komorebic promote
+                  version: 1.0.0.0
+                  position:
+                    x: 2713
+                    y: 1452
+                  variables:
+                  - name: myvar
+                    value: result
+                  children: []
+                  comment: ''
+                comment: ''
+              comment: ''
+            comment: ''
+          comment: ''
+        comment: ''
+      comment: ''
+    comment: ''
+  comment: ''
+- id: 1
+  version: 1.0.0.0
+  comment: ''
