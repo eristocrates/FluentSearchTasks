@@ -9,9 +9,9 @@ taskProjectSettings:
   id: e6bffcf8-ee96-4cc3-a8c6-1450abeba9d0
   showSettingPage: false
   projectSettings: []
-zoom: 0.7245877430470098
-offsetX: 544.6310607925176
-offsetY: 459.91467716793807
+zoom: 0.7236971484759096
+offsetX: 545.8053097345133
+offsetY: 461.4945919370698
 children:
 - id: 0
   type: Result selector
@@ -104,7 +104,7 @@ children:
           - id: 5
             type: Delay
             model:
-              delayInMS: 512
+              delayInMS: 1024
             version: 1.0.0.0
             position:
               x: 1458

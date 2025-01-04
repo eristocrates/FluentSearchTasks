@@ -104,7 +104,7 @@ children:
           - id: 5
             type: Delay
             model:
-              delayInMS: 512
+              delayInMS: 1024
             version: 1.0.0.0
             position:
               x: 1458
