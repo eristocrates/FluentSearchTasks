@@ -104,7 +104,7 @@ children:
           - id: 5
             type: Delay
             model:
-              delayInMS: 1024
+              delayInMS: 800
             version: 1.0.0.0
             position:
               x: 1458
@@ -199,41 +199,28 @@ children:
                 value: result
               children:
               - id: 7
-                type: Delay
+                type: PS Script
                 model:
-                  delayInMS: 1023
+                  powerShellExe: pwsh.exe
+                  stopOnError: true
+                  runAsAdmin: false
+                  showWindow: false
+                  content: >-
+                    $identifier = [System.IO.Path]::GetFileNameWithoutExtension($processName)
+
+                    komorebic eager-focus "$identifier.exe"
+
+                    # Read-Host "$identifier.exe"
+
+                    # komorebic promote
                 version: 1.0.0.0
                 position:
-                  x: 1222
-                  y: 1599
+                  x: 1451
+                  y: 1598
                 variables:
-                - name: myvar
+                - name: powershellScriptResult
                   value: result
-                children:
-                - id: 8
-                  type: PS Script
-                  model:
-                    powerShellExe: pwsh.exe
-                    stopOnError: true
-                    runAsAdmin: false
-                    showWindow: false
-                    content: >-
-                      $identifier = [System.IO.Path]::GetFileNameWithoutExtension($processName)
-
-                      komorebic eager-focus "$identifier.exe"
-
-                      # Read-Host "$identifier.exe"
-
-                      # komorebic promote
-                  version: 1.0.0.0
-                  position:
-                    x: 1451
-                    y: 1598
-                  variables:
-                  - name: powershellScriptResult
-                    value: result
-                  children: []
-                  comment: ''
+                children: []
                 comment: ''
               comment: ''
             comment: ''
@@ -248,7 +235,7 @@ children:
 - id: 6
   version: 1.0.0.0
   comment: ''
-- id: 9
+- id: 8
   type: Show notification
   model:
     title: Fluent Search notification
@@ -264,6 +251,6 @@ children:
     value: result
   children: []
   comment: ''
-- id: 9
+- id: 8
   version: 1.0.0.0
   comment: ''

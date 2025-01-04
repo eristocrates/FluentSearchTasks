@@ -104,11 +104,11 @@ children:
           - id: 5
             type: Delay
             model:
-              delayInMS: 1024
+              delayInMS: 800
             version: 1.0.0.0
             position:
-              x: 1458
-              y: 1448
+              x: 1440
+              y: 1452
             variables:
             - name: myvar
               value: result
@@ -199,34 +199,21 @@ children:
                 value: result
               children:
               - id: 7
-                type: Delay
+                type: PS Script
                 model:
-                  delayInMS: 1023
+                  powerShellExe: pwsh.exe
+                  stopOnError: true
+                  runAsAdmin: false
+                  showWindow: false
+                  content: komorebic promote
                 version: 1.0.0.0
                 position:
-                  x: 1218
-                  y: 1597
+                  x: 1456
+                  y: 1588
                 variables:
-                - name: myvar
+                - name: powershellScriptResult
                   value: result
-                children:
-                - id: 8
-                  type: PS Script
-                  model:
-                    powerShellExe: pwsh.exe
-                    stopOnError: true
-                    runAsAdmin: false
-                    showWindow: false
-                    content: komorebic promote
-                  version: 1.0.0.0
-                  position:
-                    x: 1456
-                    y: 1588
-                  variables:
-                  - name: powershellScriptResult
-                    value: result
-                  children: []
-                  comment: ''
+                children: []
                 comment: ''
               comment: ''
             comment: ''
@@ -241,7 +228,7 @@ children:
 - id: 6
   version: 1.0.0.0
   comment: ''
-- id: 9
+- id: 8
   type: Show notification
   model:
     title: Fluent Search notification
@@ -257,6 +244,6 @@ children:
     value: result
   children: []
   comment: ''
-- id: 9
+- id: 8
   version: 1.0.0.0
   comment: ''
