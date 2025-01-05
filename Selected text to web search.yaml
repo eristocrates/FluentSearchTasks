@@ -18,7 +18,11 @@ children:
   model:
     hotkey:
       name: Hotkey Task trigger
-      hotKeys: []
+      hotKeys:
+      - LCTRL
+      - LSHIFT
+      - LMENU
+      - T
     bindFromVariable: false
     variableName: ''
   version: 1.0.0.0
