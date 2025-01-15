@@ -41,7 +41,7 @@ children:
       content: >-
         cd "C:\Program Files\ShareX" 
 
-        .\ShareX.exe -ScreenRecorderActiveWindow
+        .\ShareX.exe -s -ScreenRecorderActiveWindow
     version: 1.0.0.0
     position:
       x: 260

@@ -38,6 +38,8 @@ children:
     value: result
   - name: windowTitle
     value: result.ResultName
+  - name: processName
+    value: result.ProcessInfo.ProcessName
   children:
   - id: 1
     type: Custom operation
@@ -146,7 +148,10 @@ children:
                     stopOnError: true
                     runAsAdmin: false
                     showWindow: false
-                    content: komorebic promote
+                    content: >-
+                      $identifier = [System.IO.Path]::GetFileNameWithoutExtension($processName)
+
+                      komorebic eager-focus "$identifier.exe"
                   version: 1.0.0.0
                   position:
                     x: 2713
